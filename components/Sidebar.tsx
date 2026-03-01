@@ -1,41 +1,48 @@
 "use client";
 import { useState } from 'react';
-import { Home, Search, Library, Plus, Menu } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Home, Search, Library, Plus, Menu, Heart, Mic2 } from 'lucide-react';
 
 export default function Sidebar() {
-  // Sekarang manual aja, gak pake auto-collapse kalau layarnya sempit
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const pathname = usePathname(); // Buat ngecek kita lagi di halaman mana
 
-  // Komponen kecil buat menu biar rapi
-  const NavItem = ({ icon: Icon, label, active = false }: { icon: any, label: string, active?: boolean }) => (
-    <button 
-      title={isCollapsed ? label : ""} 
-      className={`w-full flex items-center gap-4 py-3 rounded-xl transition-all duration-300 overflow-hidden
-        ${isCollapsed ? 'px-0 justify-center' : 'px-4 justify-start'}
-        ${active 
-          ? 'bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.05)]' 
-          : 'text-gray-400 hover:text-white hover:bg-white/5'
-        }
-      `}
-    >
-      <Icon size={24} className="flex-shrink-0" />
-      {!isCollapsed && (
-        <span className="font-semibold text-sm truncate animate-in fade-in duration-300">
-          {label}
-        </span>
-      )}
-    </button>
-  );
+  // Komponen NavItem sekarang pakai <Link> Next.js biar bisa pindah halaman
+  const NavItem = ({ icon: Icon, label, href }: { icon: any, label: string, href: string }) => {
+    const active = pathname === href; // Otomatis nyala kalau URL-nya cocok
+    
+    return (
+      <Link 
+        href={href}
+        title={isCollapsed ? label : ""} 
+        className={`w-full flex items-center gap-4 py-3 rounded-xl transition-all duration-300 overflow-hidden
+          ${isCollapsed ? 'px-0 justify-center' : 'px-4 justify-start'}
+          ${active 
+            ? 'bg-white/20 text-white shadow-[0_0_20px_rgba(255,255,255,0.15)] border border-white/10' 
+            : 'text-gray-400 hover:text-white hover:bg-white/5'
+          }
+        `}
+      >
+        <Icon size={24} className="flex-shrink-0" />
+        {!isCollapsed && (
+          <span className="font-semibold text-sm truncate animate-in fade-in duration-300">
+            {label}
+          </span>
+        )}
+      </Link>
+    );
+  };
 
   return (
     <div 
-      className={`h-screen bg-[#121212]/80 backdrop-blur-xl border-r border-white/5 flex flex-col transition-all duration-500 ease-in-out z-40 relative flex-shrink-0 
-      ${isCollapsed ? 'w-20' : 'w-64'}`}
+      className={`h-screen bg-[#121212]/95 backdrop-blur-xl border-r border-white/5 flex flex-col transition-all duration-500 ease-in-out z-50 flex-shrink-0
+      absolute md:relative /* Di HP melayang, di Laptop nempel */
+      ${isCollapsed ? 'w-20 translate-x-0' : 'w-64 translate-x-0'}
+      `}
     >
       {/* HEADER: Tombol Garis Tiga (Kiri) & Logo (Kanan) */}
       <div className={`p-6 flex items-center mb-4 transition-all gap-4 ${isCollapsed ? 'justify-center' : 'justify-start'}`}>
-        
-        {/* Tombol Garis Tiga sekarang ada di kiri logo */}
         <button 
           onClick={() => setIsCollapsed(!isCollapsed)} 
           className="p-2 bg-white/5 hover:bg-white/15 rounded-xl text-gray-400 hover:text-white transition-all focus:outline-none flex-shrink-0"
@@ -43,7 +50,6 @@ export default function Sidebar() {
           <Menu size={20} />
         </button>
 
-        {/* Logo hanya muncul kalau Sidebar lagi kebuka */}
         {!isCollapsed && (
           <h1 className="text-2xl font-bold text-white tracking-tighter animate-in fade-in slide-in-from-left-4 truncate">
             mf<span className="text-purple-500">.</span>fm
@@ -51,15 +57,40 @@ export default function Sidebar() {
         )}
       </div>
 
-      {/* MENU UTAMA */}
-      <div className="flex-1 px-3 space-y-2">
-        <NavItem icon={Home} label="Home" active={true} />
-        <NavItem icon={Search} label="Explore" />
-        <NavItem icon={Library} label="Your Library" />
+      {/* MENU CONTAINER (Bisa di-scroll kalau kepanjangan) */}
+      <div className="flex-1 px-3 space-y-8 overflow-y-auto no-scrollbar pb-24">
+        
+        {/* SEKSI 1: MAIN MENU */}
+        <div className="space-y-2">
+          <NavItem href="/" icon={Home} label="Home" />
+          <NavItem href="/explore" icon={Search} label="Explore" />
+        </div>
+
+        {/* SEKSI 2: LIBRARY */}
+        <div className="space-y-2">
+          {!isCollapsed && (
+            <p className="px-4 text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 animate-in fade-in">
+              Your Library
+            </p>
+          )}
+          <NavItem href="/library" icon={Library} label="Playlists" />
+          <NavItem href="/liked" icon={Heart} label="Liked Songs" />
+        </div>
+
+        {/* SEKSI 3: CREATOR */}
+        <div className="space-y-2">
+          {!isCollapsed && (
+            <p className="px-4 text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 animate-in fade-in">
+              Creator
+            </p>
+          )}
+          <NavItem href="/studio" icon={Mic2} label="Studio Lab" />
+        </div>
+
       </div>
 
-      {/* FOOTER Bawah */}
-      <div className="p-3 mb-24 border-t border-white/5">
+      {/* FOOTER Bawah: New Playlist */}
+      <div className="absolute bottom-0 left-0 w-full p-3 bg-[#121212] border-t border-white/5 z-10">
         <button 
           className={`w-full flex items-center gap-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300
             ${isCollapsed ? 'px-0 justify-center' : 'px-4 justify-start'}
