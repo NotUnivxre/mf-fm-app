@@ -3,8 +3,8 @@ import Sidebar from '../components/Sidebar';
 import BottomPlayer from '../components/BottomPlayer';
 
 export const metadata = {
-  title: 'mf.ify - Apple Music Clone',
-  description: 'A local music streaming app',
+  title: 'mf.fm - Your Choice Music Streaming',
+  description: 'A Beta Music Streaming Platform',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
