@@ -357,5 +357,151 @@ Strong as steel`
   { time: 165.10, text: "Everything's gonna make sense in the end when we all get out of the streets" },
   { time: 168.40, text: "" }
 ]
+  },
+  {
+    id: "6",
+    title: "Skinny Loser",
+    artist: "Sub Urban",
+    album: "If Nevermore",
+    coverImageUrl: "/skinnyloser.jpg",
+    audioUrl: "/skinnyloser.mp3",
+    explicit: true,
+    lyrics: `[Intro]
+(One, two, three, four)
+One, two, three, four
+
+[Chorus]
+I'm such a loser
+I've had enough
+I've had enough
+I'm such a loser
+I've had enough
+I've had enough, I've had enough
+
+[Verse 1]
+I'm sick of being less than
+I wanna be the only painting in your home
+Worship my image alone
+But that's not realistic
+I'm just another frail-looking boy
+Not your first choice
+
+[Pre-Chorus 1]
+And if I could have the parts of you
+You give to everybody but me
+You know I could part with you
+'Cause all you can give is your body
+No, I cannot wait forever
+Miss me when it turns September
+When the leaves do fall is when
+I know you won't find someone better
+Till the winter thaws you out of my arms again
+I won't let her go, I cannot wait forever
+Miss me when it turns December
+
+[Chorus]
+I'm such a loser
+I've had enough
+I've had enough
+I'm such a loser
+I've had enough
+I've had enough, I've had enough
+
+[Verse 2]
+I'm sick of being less than
+I reside in my cage of filth
+My love's so cheap
+Take prescription pills to sleep
+And it's not realistic
+I'm just another faithless creative (Oh)
+I can't commit
+
+[Pre-Chorus 2]
+And if I could escape from myself
+I know I wouldn't take you with me
+Make me feel like someone else
+I hope you miss him when you kiss these lips
+I cannot wait forever
+Miss me when it turns September
+When the leaves do fall is when
+I know you won't find someone better
+Till the winter thaws you out of my arms again
+I won't let her go, I cannot wait forever
+Miss me when it turns December
+
+[Bridge]
+So, I walked from that school, forgotten as a fool
+Woke up when the sun set, there's cobwebs on his shoes
+Trapped in my purgatory with nothing to lose
+But my mind and my sense of time, rotting perfused
+
+[Outro]
+And I'd do it all again too
+Barricade myself inside my own room
+I don't wanna know who you've been kissing
+I don't wanna know what I've been missing
+And I'd do it all again too (Do it all again too)
+Terrified of every girl I once knew (Every girl I once knew)
+I don't wanna know who you've been kissing
+(Know who you've been kissing)
+I don't wanna know what I've been missing
+(Know what I've been missing)`,
+    syncedLyrics: [
+      { time: 10.28, text: "One, two, three, four" },
+      { time: 11.54, text: "I'm such a loser" },
+      { time: 16.34, text: "I've had enough, I've had enough" },
+      { time: 21.86, text: "I'm such a loser" },
+      { time: 26.68, text: "I've had enough, I've had enough, I've had enough" },
+      { time: 31.92, text: "" },
+      { time: 33.18, text: "I'm sick of being less than" },
+      { time: 35.74, text: "I wanna be the only painting in your home" },
+      { time: 39.89, text: "Worship my image alone" },
+      { time: 43.44, text: "But that's not realistic" },
+      { time: 46.06, text: "I'm just another frail-looking boy" },
+      { time: 50.54, text: "Not your first choice" },
+      { time: 52.10, text: "" },
+      { time: 52.50, text: "And if I could have the parts of you you give to everybody but me" },
+      { time: 55.39, text: "You know I could part with you 'cause all you can give is your body" },
+      { time: 58.00, text: "No, I cannot wait forever" },
+      { time: 60.56, text: "Miss me when it turns September" },
+      { time: 63.12, text: "When the leaves do fall is when I know you won't find someone better" },
+      { time: 65.72, text: "Till the winter thaws you out of my arms again, I won't let her" },
+      { time: 68.34, text: "Go, I cannot wait forever" },
+      { time: 70.89, text: "Miss me when it turns December" },
+      { time: 73.48, text: "I'm such a loser" },
+      { time: 78.30, text: "I've had enough, I've had enough" },
+      { time: 83.82, text: "I'm such a loser" },
+      { time: 88.60, text: "I've had enough, I've had enough, I've had enough" },
+      { time: 93.83, text: "" },
+      { time: 95.10, text: "I'm sick of being less than" },
+      { time: 97.68, text: "I reside in my cage of filth, my love's so cheap" },
+      { time: 101.82, text: "Take prescription pills to sleep" },
+      { time: 105.40, text: "And it's not realistic" },
+      { time: 107.98, text: "I'm just another faithless creative" },
+      { time: 112.49, text: "I can't commit" },
+      { time: 113.78, text: "" },
+      { time: 114.42, text: "And if I could escape from myself, I know I wouldn't take you with me" },
+      { time: 117.34, text: "Make me feel like someone else, I hope you miss him when you kiss these lips" },
+      { time: 120.22, text: "I cannot wait forever" },
+      { time: 122.50, text: "Miss me when it turns September" },
+      { time: 125.10, text: "When the leaves do fall is when I know you won't find someone better" },
+      { time: 127.66, text: "Till the winter thaws you out of my arms again, I won't let her" },
+      { time: 130.24, text: "Go, I cannot wait forever" },
+      { time: 132.80, text: "Miss me when it turns December" },
+      { time: 135.38, text: "" },
+      { time: 145.82, text: "So, I walked from that school, forgotten as a fool" },
+      { time: 148.54, text: "Woke up when the sun set, there's cobwebs on his shoes" },
+      { time: 151.22, text: "Trapped in my purgatory with nothing to lose" },
+      { time: 153.84, text: "But my mind and my sense of time, rotting perfused" },
+      { time: 156.56, text: "And I'd do it all again, too" },
+      { time: 158.82, text: "Barricade myself inside my own room" },
+      { time: 161.39, text: "I don't wanna know who you've been kissing" },
+      { time: 163.96, text: "I don't wanna know what I've been missing" },
+      { time: 166.86, text: "And I'd do it all again, too (Do it all again, too)" },
+      { time: 169.18, text: "Terrified of every girl I once knew (Every girl I once knew)" },
+      { time: 171.77, text: "I don't wanna know who you've been kissing (Know who you've been kissing)" },
+      { time: 174.34, text: "I don't wanna know what I've been missing (Know what I've been missing)" },
+      { time: 177.52, text: "" }
+    ]
   }
 ];

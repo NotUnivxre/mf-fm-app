@@ -35,7 +35,7 @@ export default function Home() {
       {/* KIRI: Daftar Lagu (Bakal melebar kalau lirik di-minimize) */}
       <div className={`transition-all duration-700 ease-in-out ${isLyricsMinimized ? 'w-full max-w-5xl' : 'w-1/2'}`}>
         {/* Lo bebas ganti h1 ini jadi apa aja */}
-        <h1 className="text-4xl font-bold mb-8 text-white">Good Evening</h1> 
+        <h1 className="text-4xl font-bold mb-8 text-white">For You</h1> 
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-4 text-white">Recently Added</h2>
           <TrackList tracks={allTracks} />
