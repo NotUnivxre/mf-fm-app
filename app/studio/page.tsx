@@ -10,6 +10,7 @@ export default function StudioPage() {
 
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
+  const [album, setAlbum] = useState(''); // TAMBAHAN: State buat Album
   const [isExplicit, setIsExplicit] = useState(false);
   const [staticLyrics, setStaticLyrics] = useState('');
   
@@ -40,14 +41,14 @@ export default function StudioPage() {
       id: "local_" + Date.now().toString(),
       title, 
       artist, 
-      album: "Independent Release",
+      album: album || "Independent Release", // TAMBAHAN: Pakai album yang dipilih
       explicit: isExplicit,
       audioUrl, 
       coverImageUrl: coverUrl,
       lyrics: staticLyrics
     });
     alert("Track Berhasil Dirilis!");
-    setTitle(''); setArtist(''); setStaticLyrics(''); setAudioUrl(''); setCoverUrl('');
+    setTitle(''); setArtist(''); setAlbum(''); setStaticLyrics(''); setAudioUrl(''); setCoverUrl('');
   };
 
   const handleSelectTrack = (id: string) => {
@@ -113,19 +114,54 @@ export default function StudioPage() {
 
       {activeTab === 'upload' && (
         <div className="grid grid-cols-2 gap-8 overflow-y-auto no-scrollbar pb-32">
+          
+          {/* BAGIAN KIRI: TRACK DETAILS & MEDIA FILES */}
           <div className="flex flex-col gap-6">
+            
+            {/* TRACK DETAILS KOTAK */}
             <div className="bg-[#18181a] border border-white/10 p-6 rounded-2xl">
               <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2"><UploadCloud className="text-purple-500" size={20}/> Track Details</h2>
+              
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div><label className="text-xs text-gray-400 mb-1 block">Title</label><input type="text" value={title} onChange={e=>setTitle(e.target.value)} className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-purple-500 outline-none" placeholder="Song Name"/></div>
                 <div><label className="text-xs text-gray-400 mb-1 block">Artist</label><input type="text" value={artist} onChange={e=>setArtist(e.target.value)} className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-purple-500 outline-none" placeholder="Artist Name"/></div>
               </div>
+
+              {/* TAMBAHAN 1: ALBUM SELECTION */}
+              <div className="mb-4">
+                <label className="text-xs text-gray-400 mb-1 block">Album Assignment</label>
+                <div className="flex gap-2">
+                  <select value={album} onChange={e=>setAlbum(e.target.value)} className="flex-1 bg-black/50 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-purple-500 outline-none appearance-none cursor-pointer">
+                    <option value="">Select an existing album...</option>
+                    <option value="The Dark Pop Era">The Dark Pop Era</option>
+                    <option value="Midnight Vibes">Midnight Vibes</option>
+                  </select>
+                  <button className="px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg text-white text-sm font-medium transition-all">
+                    + New
+                  </button>
+                </div>
+              </div>
+
+              {/* TAMBAHAN 2: STATIC LYRICS */}
+              <div className="mb-4">
+                <label className="text-xs text-gray-400 mb-1 block">Static Lyrics <span className="text-gray-500">(Optional)</span></label>
+                <textarea 
+                  value={staticLyrics}
+                  onChange={e=>setStaticLyrics(e.target.value)}
+                  rows={4} 
+                  placeholder="Paste your lyrics here..." 
+                  className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-sm text-white focus:border-purple-500 outline-none resize-none"
+                ></textarea>
+              </div>
+
+              {/* EXPLICIT CONTENT (ASLI) */}
               <div className="flex items-center justify-between bg-black/50 p-3 rounded-lg border border-white/10">
                 <span className="text-sm text-white">Explicit Content</span>
                 <input type="checkbox" checked={isExplicit} onChange={e=>setIsExplicit(e.target.checked)} className="accent-purple-500 w-5 h-5 cursor-pointer" />
               </div>
             </div>
 
+            {/* MEDIA FILES */}
             <div className="bg-[#18181a] border border-white/10 p-6 rounded-2xl">
               <h2 className="text-lg font-bold text-white mb-4">Media Files</h2>
               <input type="file" accept="audio/*" ref={audioInputRef} hidden onChange={handleAudioUpload} />
@@ -144,6 +180,7 @@ export default function StudioPage() {
             </div>
           </div>
 
+          {/* BAGIAN KANAN: LIVE PREVIEW */}
           <div>
              <div className="bg-[#18181a] border border-white/10 p-6 rounded-2xl sticky top-0">
                <h2 className="text-xs font-bold text-gray-500 tracking-widest mb-6">LIVE PREVIEW</h2>

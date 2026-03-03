@@ -3,10 +3,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Search, Library, Plus, Menu, Heart, Mic2 } from 'lucide-react';
+import { usePlayerStore } from '../store/usePlayerStore';
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname(); 
+  const createPlaylist = usePlayerStore((state) => state.createPlaylist); // Sinkron!
 
   const NavItem = ({ icon: Icon, label, href }: { icon: any, label: string, href: string }) => {
     const active = pathname === href; 
@@ -41,7 +43,7 @@ export default function Sidebar() {
         </div>
         <div className="space-y-2">
           {!isCollapsed && <p className="px-4 text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3">Your Library</p>}
-          <NavItem href="/library" icon={Library} label="Playlists" />
+          <NavItem href="/playlists" icon={Library} label="Playlists" />
           <NavItem href="/liked" icon={Heart} label="Liked Songs" />
         </div>
         <div className="space-y-2">
@@ -51,7 +53,13 @@ export default function Sidebar() {
       </div>
 
       <div className="absolute bottom-0 left-0 w-full p-3 bg-[#121212] border-t border-white/5 z-10">
-        <button onClick={() => alert("Fitur database menyusul!")} className={`w-full flex items-center gap-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 ${isCollapsed ? 'px-0 justify-center' : 'px-4 justify-start'}`}>
+        <button 
+          onClick={() => {
+            const name = prompt("Masukkan nama Playlist baru:");
+            if (name) createPlaylist(name);
+          }} 
+          className={`w-full flex items-center gap-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 ${isCollapsed ? 'px-0 justify-center' : 'px-4 justify-start'}`}
+        >
           <div className="p-1 bg-white/10 rounded-md flex-shrink-0"><Plus size={16} className="text-white" /></div>
           {!isCollapsed && <span className="font-semibold text-sm truncate">New Playlist</span>}
         </button>

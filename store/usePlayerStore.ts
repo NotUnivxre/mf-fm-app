@@ -38,10 +38,18 @@ interface PlayerState {
   // FUNGSI BARU BUAT TOMBOL NEXT & PREV
   playNext: () => void;
   playPrevious: () => void;
+  
+  // FUNGSI BARU BUAT PLAY SE-PLAYLIST FULL
+  playPlaylist: (trackIds: string[]) => void;
 
   toggleLike: (trackId: string) => void;
   createPlaylist: (name: string) => void;
   addToPlaylist: (playlistId: string, trackId: string) => void;
+  
+  // FUNGSI BARU BUAT EDIT & HAPUS PLAYLIST
+  updatePlaylistName: (id: string, name: string) => void;
+  deletePlaylist: (id: string) => void;
+  
   addTrack: (track: Track) => void;
   updateTrackLyrics: (id: string, lyrics: string, syncedLyrics?: SyncedLyric[]) => void;
 }
@@ -128,6 +136,26 @@ export const usePlayerStore = create<PlayerState>()(
         }
       },
 
+      // LOGIKA PLAYLIST
+      playPlaylist: (trackIds) => {
+        const { allTracks } = get();
+        if (trackIds.length === 0) return;
+
+        // Cocokin ID sama data asli, pake strict type guard biar TS gak ngambek
+        const fullTracks = trackIds
+          .map(id => allTracks.find(t => t.id === id))
+          .filter((t): t is Track => t !== undefined);
+        
+        if (fullTracks.length > 0) {
+          // Puter lagu pertama, sisa lagunya lempar ke queue
+          set({ 
+            currentTrack: fullTracks[0], 
+            isPlaying: true,
+            queue: fullTracks.slice(1) 
+          });
+        }
+      },
+
       toggleLike: (trackId) => set((state) => ({
         likedTracks: state.likedTracks.includes(trackId)
           ? state.likedTracks.filter(id => id !== trackId)
@@ -142,6 +170,14 @@ export const usePlayerStore = create<PlayerState>()(
             ? { ...p, tracks: [...p.tracks, trackId] } 
             : p
         )
+      })),
+      
+      // LOGIKA EDIT & HAPUS PLAYLIST
+      updatePlaylistName: (id, name) => set((state) => ({
+        playlists: state.playlists.map(p => p.id === id ? { ...p, name } : p)
+      })),
+      deletePlaylist: (id) => set((state) => ({
+        playlists: state.playlists.filter(p => p.id !== id)
       })),
 
       addTrack: (track) => set((state) => ({ allTracks: [track, ...state.allTracks] })),
